@@ -69,10 +69,18 @@ class BaseController() :
         #    print(self._name + " | "+ str(message))
         return
 
+    def _log(self, message, loglevel = 40) :
+        if self._logger != None :
+            self._logger.Log(message, loglevel)
+        return
+
     def _verbose(self, message) :
         self._print(message, 40)
         return
 
+    def _important(self, message) :
+        self._print(message, 1)
+        return
 
     def _info(self, message) :
         self._print(message, 10)

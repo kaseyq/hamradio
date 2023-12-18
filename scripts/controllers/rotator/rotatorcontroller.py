@@ -47,8 +47,8 @@ class RotatorController(BaseController) :
         self._printState()
         return
 
-    def _printDegrees(self) :
-        self._info("%s degrees" %(self._getDisplayDegrees()))
+    def _printDegrees(self, level = 40) :
+        self._log("%s degrees" %(self._getDisplayDegrees()), level)
         return
         
     def _normalizeDirection(self, direction) :
@@ -77,7 +77,7 @@ class RotatorController(BaseController) :
 
         if priorDegrees != degrees :
             self._configFile.Write()
-            self._printDegrees()
+            self._printDegrees(1)
 
         return
     
@@ -120,9 +120,9 @@ class RotatorController(BaseController) :
 
         delta = abs(self._getDegrees() - memoryEntry["Degrees"])
 
-        self._print("Memory Degrees " + str(memoryEntry["Degrees"]))
+        self._info("Memory Degrees " + str(memoryEntry["Degrees"]))
 
-        self._print("Delta = " + str(delta))
+        self._info("Delta = " + str(delta))
 
         duration = float(0)
 
