@@ -57,12 +57,13 @@ def main(argv=None):
 
     ScriptAction = None
     controls = Controls()
-    controls.Logger = _logger
-    controls.Mock =  mock
-    controls.RigControl = RigController(mock)
-    controls.TunerControl = TunerController(mock)
-    controls.RotatorControl = RotatorController(mock)
-    controls.ToneControl = ToneController(mock)
+    controls._logger = _logger
+    controls._mock =  mock
+
+#controls.RigControl = RigController(mock)
+#    controls.TunerControl = TunerController(mock)
+#    controls.RotatorControl = RotatorController(mock)
+#    controls.ToneControl = ToneController(mock)
 
 
     if action != None :

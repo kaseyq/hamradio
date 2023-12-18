@@ -12,7 +12,6 @@ class BaseController() :
     _configName: str
     _configClass: object
     _configFile: object
-    _logLevel: int
     _mock: bool
     _busy: bool
     _poolSize = int
@@ -23,8 +22,6 @@ class BaseController() :
 
     def __init__(self, mock = False, logger = None) :
         self._logger = logger
-        self._logLevel = 40
-
         self._busy = False
         self._mock = mock
         self._configFile = ConfigFile(self._configClass, self._configName)
@@ -99,9 +96,9 @@ class BaseController() :
         loglevel = 99
 
         if duration >= 5 :
-            loglevel = 10
+            loglevel = 1
 
-        self._print("Wait " + str(self._formatFloat(duration)) + " seconds", loglevel)
+        self._log("Wait " + str(self._formatFloat(duration)) + " seconds", loglevel)
         time.sleep(duration)
 
         return

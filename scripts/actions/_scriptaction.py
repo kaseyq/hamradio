@@ -108,19 +108,19 @@ class ScriptAction() :
 
 
     def _logger(self) :
-        return self._controls.Logger
+        return self._controls.Logger()
 
     def _rig(self) :
-        return self._controls.RigControl
+        return self._controls.RigControl()
 
     def _rotator(self) :
-        return self._controls.RotatorControl
+        return self._controls.RotatorControl()
 
     def _tuner(self) :
-        return self._controls.TunerControl
+        return self._controls.TunerControl()
 
     def _tone(self) :
-        return self._controls.ToneControl
+        return self._controls.ToneControl()
 
         
 if __name__ == "__main__" :
