@@ -75,7 +75,7 @@ class TunerConfig(JsonSerializable) :
     def GetAllTempMemoryIndicies(self) :
         ret = []
         for entry in self.MemoryEntries :
-            if entry["Temp"] == True :
+            if "Temp" in entry and entry["Temp"] == True :
                 ret.append(entry["Index"])
 
         return ret
