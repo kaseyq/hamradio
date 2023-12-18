@@ -23,6 +23,7 @@ class RotateToAction(ScriptAction) :
 
         self._important("start = %s"%(str(self._rotator().Degrees())))
 
+        self._rotator().MoveToDegreesWithMemory(self.Degrees)
         while self._rotator()._busy == True :
             self._sleep(0.1)
             self._important("Degrees = %s"%(str(self._rotator().Degrees())))
