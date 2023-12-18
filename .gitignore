@@ -161,3 +161,9 @@ cython_debug/
 scripts/.DS_Store
 scripts/actions/.DS_Store
 scripts/controllers/.DS_Store
+**.DS_Store
+configs/rig_config.config.json
+configs/rotator_config.config.json
+configs/tone_config.config.json
+configs/tuner_config.config.json
+.DS_Store

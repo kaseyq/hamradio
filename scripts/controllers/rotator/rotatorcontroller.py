@@ -25,7 +25,7 @@ class RotatorController(BaseController) :
     
     def _initializePosition(self, write = True, force = False) :
         if force == True or self._c().PositionInitialized != True :
-            self._print("Initializing Position")
+            self._info("Initializing Position")
             self._busy = True
             self._sendCommandAsync(self._c().InitialPositionCommand)
             self._sleep(self._c().InitPositionDuration)        
@@ -38,7 +38,7 @@ class RotatorController(BaseController) :
             if write == True :
                 self._configFile.Write()
 
-            self._print("Initialized Position")
+            self._info("Initialized Position")
         return
 
     # overriden
@@ -48,7 +48,7 @@ class RotatorController(BaseController) :
         return
 
     def _printDegrees(self) :
-        self._print("%s degrees" %(self._getDisplayDegrees()))
+        self._info("%s degrees" %(self._getDisplayDegrees()))
         return
         
     def _normalizeDirection(self, direction) :
@@ -58,6 +58,10 @@ class RotatorController(BaseController) :
             direction = 1
             
         return direction
+
+    def Degrees(self) :
+
+        return self._getDisplayDegrees()
         
     def _getDisplayDegrees(self) :
         return float("{:.2f}".format(self._getDegrees()))
@@ -87,7 +91,7 @@ class RotatorController(BaseController) :
         #TODO: check self.Config.ValidCommands
         
         if self._mock == True :
-            print("Mock IR Command: %s %s" %(str(self._c().RemoteName),str(cmd)))
+            self._verbose("Mock IR Command: %s %s" %(str(self._c().RemoteName),str(cmd)))
         else :
             irsend.send_once(self._c().RemoteName, [cmd])
         
@@ -192,7 +196,7 @@ class RotatorController(BaseController) :
         return
 
     def MoveToDegreesWithMemory(self, degrees) :
-        self._print("start")
+        self._info("start")
         
         delta = degrees - self._getDegrees()
 
@@ -217,7 +221,7 @@ class RotatorController(BaseController) :
 
             self._configFile.Write()
 
-        self._print("done")
+        self._info("done")
 
         return
 
@@ -242,7 +246,7 @@ class RotatorController(BaseController) :
             #self._print("wait " + str(tickDelay)+"s")
             self._sleep(tickDelay)
             totalCount += 1
-            self._print ("Count " + str(totalCount))
+            self._info ("Count " + str(totalCount))
         return
 
 if __name__ == "__main__" :
