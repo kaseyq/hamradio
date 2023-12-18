@@ -6,5 +6,5 @@ class RigConfig(JsonSerializable) :
     LogLevel: int
     def __init__(self) :
         self.URL = "http://10.0.0.52:12345"
-        self.TunePower = 1
+        self.TunePower = 5
         self.LogLevel = 99
