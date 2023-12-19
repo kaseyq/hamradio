@@ -47,7 +47,7 @@ class RotatorController(BaseController) :
         self._printState()
         return
 
-    def _printDegrees(self, level = 40) :
+    def _printDegrees(self, level = 10) :
         self._log("%s degrees" %(self._getDisplayDegrees()), level)
         return
         
@@ -60,7 +60,6 @@ class RotatorController(BaseController) :
         return direction
 
     def Degrees(self) :
-
         return self._getDisplayDegrees()
         
     def _getDisplayDegrees(self) :
@@ -77,7 +76,7 @@ class RotatorController(BaseController) :
 
         if priorDegrees != degrees :
             self._configFile.Write()
-            self._printDegrees(1)
+            self._important("%s degrees" %(self._getDisplayDegrees()))
 
         return
     
@@ -114,6 +113,9 @@ class RotatorController(BaseController) :
             self._busy = False
             return
 
+        self._important("Rotating to memory %s at %s degrees" %(memoryEntry.Command, str(memoryEntry.Degrees)))
+
+
         self._sendCommandAsync(memoryEntry["Command"])
         
         self._busy = True
@@ -126,19 +128,23 @@ class RotatorController(BaseController) :
 
         duration = float(0)
 
+
         if abs(delta) > 0 :
            duration = (delta/360) * self._c().MaxMemoryDuration
         
+        self._important("Wait for %s seconds" %(str(duration)))
+
         self._sleep(duration)
         
         self._setDegrees(memoryEntry["Degrees"])
         
+        self._important("Rotated to memory %s at %s degrees" %(memoryEntry.Command, str(memoryEntry.Degrees)))
         self._busy = False
                 
         return
 
     def _move(self, degreeMove) :
-        self._print("Move " + str(self._formatFloat(degreeMove)) + " degrees")
+        self._verbose("Move " + str(self._formatFloat(degreeMove)) + " degrees")
 
         self._busy = True
             
@@ -196,7 +202,7 @@ class RotatorController(BaseController) :
         return
 
     def MoveToDegreesWithMemory(self, degrees) :
-        self._info("start")
+        self._verbose("MoveToDegreesWithMemory - Start")
         
         delta = degrees - self._getDegrees()
 
@@ -221,7 +227,7 @@ class RotatorController(BaseController) :
 
             self._configFile.Write()
 
-        self._info("done")
+        self._verbose("MoveToDegreesWithMemory - Done")
 
         return
 
