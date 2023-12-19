@@ -8,15 +8,17 @@ The following options are available:
 
 	Actions:
 
-	Frequency <float in megahertz>
+	Frequency <float megahertz>
 		-a Frequency 14.09570
 
 	Tune
 		-a Tune
 
-	RotateTo <float in degrees>
+	RotateTo <float degrees>
 		-a RotateTo 30
 
+	Power <int power>
+		-a Power 50
 
 	Examples:
 
