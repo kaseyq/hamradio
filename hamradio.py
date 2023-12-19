@@ -4,7 +4,7 @@ from scripts.common._controls import Controls
 from scripts.actions.tuneaction import TuneAction
 from scripts.actions.rotatetoaction import RotateToAction
 from scripts.actions.frequencyaction import FrequencyAction
-
+from scripts.actions.poweraction import PowerAction
 
 from scripts.controllers.rig.rigcontroller import RigController
 from scripts.controllers.rotator.rotatorcontroller import RotatorController
