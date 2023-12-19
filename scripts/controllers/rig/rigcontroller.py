@@ -86,7 +86,7 @@ class RigController(BaseController) :
         ret = 0
         if self._mock == True :
             self._print("Mock self._rpcProxy.rig.get_vfo()")
-            ret = 14.098 * 1000000
+            ret = int(14.098 * 1000000)
         else :
             ret = self._rpcProxy.rig.get_vfo()
         return ret
