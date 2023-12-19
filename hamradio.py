@@ -21,7 +21,8 @@ class HamRadio() :
 	_actionMap = {
 		"Tune" : TuneAction,
 		"RotateTo" : RotateToAction,
-		"Frequency" : FrequencyAction
+		"Frequency" : FrequencyAction,
+		"Power" : PowerAction
 	}
 
 	def __init__(self, logger = None) :

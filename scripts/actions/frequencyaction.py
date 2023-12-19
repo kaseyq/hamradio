@@ -9,12 +9,6 @@ class FrequencyAction(ScriptAction) :
 
     def InitAction(self, args = []) :
         self.Frequency = float(args[0])
-        
-        #self.RigControl = self._controllers.RigControl
-        #self.TunerControl = self._controllers.TunerControl
-        #self.RotatorControl = self._controllers.RotatorControl
-        #self.ToneControl = self._controllers.ToneControl
-        
         return
     
     def _start(self) :
@@ -33,7 +27,3 @@ class FrequencyAction(ScriptAction) :
         # stop doing stuff
         return
 
-
-    
-    
-    
