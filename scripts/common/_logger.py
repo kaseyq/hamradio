@@ -15,8 +15,9 @@ class Logger() :
 	{ "level" : 0, "name": "Exception", "abv": "EX!"},
 	{ "level" : 1, "name": "Error", "abv": "ERR"},
 	{ "level" : 2, "name": "Warn", "abv": "WRN"},
-	{ "level" : 3, "name": "Info", "abv": "INF"},
-	{ "level" : 40, "name": "Dev", "abv": "DEV"},
+	{ "level" : 3, "name": "Important", "abv": "WRN"},
+	{ "level" : 40, "name": "Info", "abv": "INF"},
+	{ "level" : 50, "name": "Dev", "abv": "DEV"},
 	{ "level" : 99, "name": "Verbose", "abv": "VRB"}]
 
 	def __init__(self, Mock = False, logLevel = 40) :
@@ -24,8 +25,12 @@ class Logger() :
 		return
 
 	def _logLevelAbbreviation(self, level) :
-		ret = "Log"
-		for x in range(len(self.LogLevels)) :
+		ret = "log %s" %(str(level))
+
+		count = len(self.LogLevels)
+		index = count 
+		while index >= 0 :
+			index -= 1
 			if level <= self.LogLevels[x]["level"] :
 				ret = self.LogLevels[x]["abv"]
 			else :
