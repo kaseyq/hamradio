@@ -1,4 +1,6 @@
 from datetime import datetime
+import os.path
+from pathlib import Path
 
 class Logger() :
 	_level: int
@@ -87,31 +89,17 @@ class Logger() :
 	def _appendLogEntry(self, entry) :
 		self._writeLogEntry("\n" + str(entry))
 
-    def _getFilePath(self):
-        
-        fileName = "hamradio.log"
-        
-        curPath = os.path.realpath(__file__)
-        curDir = os.path.dirname(curPath)
-        
-        filepath = os.path.join(curDir, os.path.pardir, os.path.pardir)
+	def _getFilePath(self) : 
+		fileName = "hamradio.log"
 
-        return os.path.join(filepath, fileName)
+		curPath = os.path.realpath(__file__)
+		curDir = os.path.dirname(curPath)
 
-	
-	def _writeLogEntry(self, logs) :
-		filepath = 
+		filepath = os.path.join(curDir, os.path.pardir, os.path.pardir)
 
-        #print("configfile.Write " + configFilePath)
-        
-        #jsonData = jsons.dumps(self.Config)
-        #print(jsonData)
-        
+		return os.path.join(filepath, fileName)
 
-        filepath = self._getFilePath()
-
-        #Path(os.path.dirname(filepath)).mkdir(parents=True, exist_ok=True)
-        
-        fileHandle = open(self._getFilePath(), "class")
-        fileHandle.append(logs)
-        fileHandle.close()
+	def _writeLogEntry(self, logs) :        
+		fileHandle = open(self._getFilePath(), "a")
+		fileHandle.write(logs)
+		fileHandle.close()
