@@ -33,31 +33,31 @@ class Controls() :
 
 	def RigControl(self) :
 		if self._rigControl == None :
-			self._rigControl = RigController()
+			self._rigControl = RigController(self._mock)
 
 		return self._rigControl
 
 	def TunerControl(self) :
 		if self._tunerControl == None :
-			self._tunerControl = TunerController()
+			self._tunerControl = TunerController(self._mock)
 
 		return self._tunerControl
 
 	def TunerControl(self) :
 		if self._tunerControl == None :
-			self._tunerControl = TunerController()
+			self._tunerControl = TunerController(self._mock)
 
 		return self._tunerControl
 
 
 	def RotatorControl(self) :
 		if self._rotatorControl == None :
-			self._rotatorControl = RotatorController()
+			self._rotatorControl = RotatorController(self._mock)
 
 		return self._rotatorControl
 
 	def ToneControl(self) :
 		if self._toneControl == None :
-			self._toneControl = ToneController()
+			self._toneControl = ToneController(self._mock)
 
 		return self._toneControl

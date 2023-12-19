@@ -7,8 +7,9 @@ class Logger() :
 	ExceptionLevel = 0
 	ErrorLevel = 1
 	WarnLevel = 2
-	InfoLevel = 3
-	DevLevel = 40
+	ImportantLevel = 3
+	InfoLevel = 40
+	DevLevel = 50
 	VerboseLevel = 99
 
 	LogLevels = [
@@ -38,10 +39,23 @@ class Logger() :
 
 		return ret
 
+	def SetLogLevel(self, level) :
+
+		self.Log
+		_level = level
+
+
+		return
+
 	def Log(self, message, level) :
-		#a = LogLevels[]
+		
+		formattedLogEntry = str(datetime.now()) + " | " + self._logLevelAbbreviation(level) + " | " + str(message)
+
 		if level <= self._level :
-			print(str(datetime.now()) + " | " + self._logLevelAbbreviation(level) + " | " + str(message))
+			print(formattedLogEntry)
+
+		self._appendLogEntry(formattedLogEntry)
+
 		return
 
 	def Exception(self, message) :
@@ -55,6 +69,9 @@ class Logger() :
 		self.Log(message, self.WarnLevel)
 		return
 
+	def Important(self, message) :
+		self.Log(message, self.ImportantLevel)
+		return
 	def Info(self, message) :
 		self.Log(message, self.InfoLevel)
 		return
@@ -62,3 +79,39 @@ class Logger() :
 	def Dev(self, message) :
 		self.Log(message, self.DevLevel)
 		return
+
+	def Verbose(self, message) :
+		self.Log(message, self.VerboseLevel)
+		return
+
+	def _appendLogEntry(self, entry) :
+		self._writeLogEntry("\n" + str(entry))
+
+    def _getFilePath(self):
+        
+        fileName = "hamradio.log"
+        
+        curPath = os.path.realpath(__file__)
+        curDir = os.path.dirname(curPath)
+        
+        filepath = os.path.join(curDir, os.path.pardir, os.path.pardir)
+
+        return os.path.join(filepath, fileName)
+
+	
+	def _writeLogEntry(self, logs) :
+		filepath = 
+
+        #print("configfile.Write " + configFilePath)
+        
+        #jsonData = jsons.dumps(self.Config)
+        #print(jsonData)
+        
+
+        filepath = self._getFilePath()
+
+        #Path(os.path.dirname(filepath)).mkdir(parents=True, exist_ok=True)
+        
+        fileHandle = open(self._getFilePath(), "class")
+        fileHandle.append(logs)
+        fileHandle.close()
