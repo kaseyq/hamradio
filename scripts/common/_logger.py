@@ -18,7 +18,7 @@ class Logger() :
 	{ "level" : 0, "name": "Exception", "abv": "EX!"},
 	{ "level" : 1, "name": "Error", "abv": "ERR"},
 	{ "level" : 2, "name": "Warn", "abv": "WRN"},
-	{ "level" : 3, "name": "Important", "abv": "WRN"},
+	{ "level" : 3, "name": "Important", "abv": "IMP"},
 	{ "level" : 40, "name": "Info", "abv": "INF"},
 	{ "level" : 50, "name": "Dev", "abv": "DEV"},
 	{ "level" : 99, "name": "Verbose", "abv": "VRB"}]
@@ -74,7 +74,7 @@ class Logger() :
 	def Important(self, message) :
 		self.Log(message, self.ImportantLevel)
 		return
-		
+
 	def Info(self, message) :
 		self.Log(message, self.InfoLevel)
 		return
