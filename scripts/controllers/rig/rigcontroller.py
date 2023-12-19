@@ -83,15 +83,16 @@ class RigController(BaseController) :
         return
 
     def GetFrequency(self) :
+        ret = 0
         if self._mock == True :
             self._print("Mock self._rpcProxy.rig.get_vfo()")
-            ret = 14 * 1000000
+            ret = 14.098 * 1000000
         else :
             ret = self._rpcProxy.rig.get_vfo()
         return ret
 
     def GetFrequencyMegahertz(self) :
-        return self.GetFrequency() / 1000000
+        return float(self.GetFrequency())/ 1000000
 
     def SetFrequencyMegahertz(self, frequency) :
         self.SetFrequency(frequency * 1000000)
