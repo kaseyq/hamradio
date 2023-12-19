@@ -13,12 +13,14 @@ class ScriptAction() :
     _logLevel: int
 
     def __init__(self, controls, args = [], autorun = True) :
-        print(args)
         self._logLevel = 40
         self._running = False
         self._controls = controls
         #self.IsRunning = False
         self._args = args
+
+        self._info(self._args)
+
 
         self.InitAction(self._args)
 
@@ -33,7 +35,7 @@ class ScriptAction() :
         return _running
 
     def Start(self) :
-        self._print("Start")
+        self._info("Start")
         ret = False
 
         if self._running == False :
@@ -95,10 +97,10 @@ class ScriptAction() :
 
     def _sleep(self, duration) :
 
-        loglevel = 99
+        loglevel = _logger().VerboseLevel
 
-        if duration >= 5 :
-            loglevel = 10
+        if duration >= 3 :
+            loglevel = _logger().ImportantLevel
 
         self._logger().Log("Wait " + str(duration) + " seconds", loglevel)
 

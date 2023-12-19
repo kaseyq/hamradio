@@ -19,8 +19,14 @@ class FrequencyAction(ScriptAction) :
     
     def _start(self) :
         # do stuff
+        self._important("Frequency is : " + str(self._rig().GetFrequencyMegahertz()))
+
         self._rig().SetFrequencyMegahertz(self.Frequency)
         self._important("Frequency is : " + str(self._rig().GetFrequencyMegahertz()))
+
+
+        self.Stop()
+
         return
 
     def _stop(self) :
