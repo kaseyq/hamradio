@@ -8,7 +8,7 @@ class PowerAction(ScriptAction) :
     Degrees = 0.0
 
     def InitAction(self, args = []) :
-        self.Power = float(args[0])
+        self.Power = int(args[0])
         return
     
     def _start(self) :
