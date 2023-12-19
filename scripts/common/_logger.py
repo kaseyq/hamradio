@@ -31,8 +31,8 @@ class Logger() :
 		index = count 
 		while index >= 0 :
 			index -= 1
-			if level <= self.LogLevels[x]["level"] :
-				ret = self.LogLevels[x]["abv"]
+			if level <= self.LogLevels[index]["level"] :
+				ret = self.LogLevels[index]["abv"]
 			else :
 				break
 
