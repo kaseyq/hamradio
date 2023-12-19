@@ -138,7 +138,7 @@ class RotatorController(BaseController) :
         
         self._setDegrees(memoryEntry["Degrees"])
         
-        self._important("Rotated to memory %s at %s degrees" %(memoryEntry.Command, str(memoryEntry.Degrees)))
+        self._important("Rotated to memory %s at %s degrees" %(memoryEntry["Command"], str(memoryEntry["Degrees"])))
         self._busy = False
                 
         return
