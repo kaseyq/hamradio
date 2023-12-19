@@ -97,10 +97,10 @@ class ScriptAction() :
 
     def _sleep(self, duration) :
 
-        loglevel = _logger().VerboseLevel
+        loglevel = self._logger().VerboseLevel
 
         if duration >= 3 :
-            loglevel = _logger().ImportantLevel
+            loglevel = self._logger().ImportantLevel
 
         self._logger().Log("Wait " + str(duration) + " seconds", loglevel)
 
