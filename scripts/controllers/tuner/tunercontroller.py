@@ -165,7 +165,7 @@ class TunerController(BaseController) :
         # sync
         self.WaitForIdle()
         
-        self._c().SetMemory(index, name)
+        self._c().SetMemory(index, name, temp)
             
         payload = {"M"+str(index): name}
         headersObj = {"Content-Type": "application/x-www-form-urlencoded"}

@@ -44,7 +44,7 @@ class RigController(BaseController) :
     
         if self._mock == True :
             self._verbose("Mock self._rpcProxy.rig.get_swrmeter()")
-            ret = 1
+            ret = 55
         else :
             ret = self._rpcProxy.rig.get_swrmeter()
         

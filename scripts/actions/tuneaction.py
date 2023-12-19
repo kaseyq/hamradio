@@ -23,12 +23,9 @@ class TuneAction(ScriptAction) :
         self.MinFineTuneSWR = 0
         self.MinMemoryBypassSWR = 6
         self.SWRMeasurementCount = 10
+        self._tempMemoryIndicies = []
 
         #self.TempMemoryIndicies = [7,8,9]
-
-
-        self.TempMemoryIndicies = self._tuner().GetAllTempMemoryIndicies()
-
 
 
 
@@ -66,13 +63,24 @@ class TuneAction(ScriptAction) :
         self._verbose("MeasureSWR")
         return self._rig().MeasureSWROverTime(self.SWRMeasurementCount)
         
+
+    def TempMemoryIndicies(self) :
+        if len(self._tempMemoryIndicies) == 0 :
+            self._tempMemoryIndicies = self._tuner().GetAllTempMemoryIndicies()
+
+        return self._tempMemoryIndicies
+
     def AddTuneEntry(self, tuneResults) :
         self._verbose("AddTuneEntry - Start")
 
+        resultIndex = len(tuneResults)
 
-        memoryIndex = self.TempMemoryIndicies[len(tuneResults)]
+        #print("resultIndex = " + str(resultIndex))
+        #print("len(self.TempMemoryIndicies()) = " + str(len(self.TempMemoryIndicies())))
+        memoryIndex = self.TempMemoryIndicies()[resultIndex]
 
         self._tuner().SetTempMemory(memoryIndex)
+
         tuneResults.append(TuneEntry(memoryIndex, self.MeasureSWR(), self._tuner().CurrentStep()))
 
         self._important(tuneResults[len(tuneResults) - 1].FormatForDisplay())

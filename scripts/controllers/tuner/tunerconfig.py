@@ -28,21 +28,19 @@ class TunerConfig(JsonSerializable) :
         self.LogLevel = 99
         self.MinStep = 0
         self.MaxStep = 1
-        self.MemoryEntries = []
         self.MaxMemoryEntryCount = 10
         self.MaxTempMemories = 3
 
-        #self.Memory = TunerMemory()
-        self.MemoryEntries.append({"Index":0, "Name":"20m", "Temp":False})
-        self.MemoryEntries.append({"Index":1, "Name":"30m", "Temp":False})
-        self.MemoryEntries.append({"Index":2, "Name":"40m", "Temp":False})
-        self.MemoryEntries.append({"Index":3, "Name":"?", "Temp":False})
-        self.MemoryEntries.append({"Index":4, "Name":"?", "Temp":False})
-        self.MemoryEntries.append({"Index":5, "Name":"?", "Temp":False})
-        self.MemoryEntries.append({"Index":6, "Name":"?", "Temp":False})
-        self.MemoryEntries.append({"Index":7, "Name":"TEMP0", "Temp":True})
-        self.MemoryEntries.append({"Index":8, "Name":"TEMP1", "Temp":True})
-        self.MemoryEntries.append({"Index":9, "Name":"TEMP2", "Temp":True})
+        self.MemoryEntries = [{"Index":0, "Name":"20m", "Temp":False},
+        {"Index":1, "Name":"30m", "Temp":False},
+        {"Index":2, "Name":"40m", "Temp":False},
+        {"Index":3, "Name":"?", "Temp":False},
+        {"Index":4, "Name":"?", "Temp":False},
+        {"Index":5, "Name":"?", "Temp":False},
+        {"Index":6, "Name":"?", "Temp":False},
+        {"Index":7, "Name":"TEMP0", "Temp":True},
+        {"Index":8, "Name":"TEMP1", "Temp":True},
+        {"Index":9, "Name":"TEMP2", "Temp":True}]
         return
 
     def GetMemoryByName(self, name):
@@ -64,8 +62,8 @@ class TunerConfig(JsonSerializable) :
 
         return ret
 
-    def SetMemory(self, index, name) :
-        self.SetMemoryEntry({"Index" : index, "Name" :name})
+    def SetMemory(self, index, name, temp) :
+        self.SetMemoryEntry({"Index" : index, "Name" :name, "Temp": temp})
         return
         
     def SetMemoryEntry(self, entry) :
@@ -74,7 +72,10 @@ class TunerConfig(JsonSerializable) :
 
     def GetAllTempMemoryIndicies(self) :
         ret = []
+
+        #print("self.MemoryEntries len = " + str(len( self.MemoryEntries )))
         for entry in self.MemoryEntries :
+            #print(entry)
             if "Temp" in entry and entry["Temp"] == True :
                 ret.append(entry["Index"])
 
