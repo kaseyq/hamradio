@@ -17,7 +17,7 @@ from scripts.common._logger import Logger
 def main(argv=None):
 
     _logger = Logger()
-    actions = {
+    actionMap = {
         "Tune" : TuneAction,
         "RotateTo" : RotateToAction,
         "Frequency" : FrequencyAction
@@ -32,22 +32,28 @@ def main(argv=None):
 
     action = None
     actionAutoStart = True
-    actionArgs = []
+
+    actions = []
 
     _logger.Info(argv)
     for x in range(len(argv)) :
         _logger.Info(argv[x])
 
-
         if argv[x] == "-a" and x + 1 < len(argv) :
-            _logger.Info("Action")
-            action = argv[x + 1]
+            actionEntry = {"action":argv[x + 1], "args" : []}
+
+            y = x + 2
+            while y < len(argv) :
+                if argv[y].startswith("-") :
+                    break
+                else :
+                    actionEntry["args"].append(argv[y])
+                y += 1
+            
+            actions.append(actionEntry)
+            #actions.append({"action":action, "args" : actionArgs})
 
             _logger.Info("Action = " + str(action))
-            #
-            #autoTune = True
-        elif argv[x] == "-arg" and x + 1 < len(argv) :
-            actionArgs.append(argv[x + 1])
         elif argv[x] == "-v" :
             loglevel = 99
         elif argv[x] == "-m" :
@@ -55,22 +61,16 @@ def main(argv=None):
 
     _logger.Info("Mock = " + str(mock))
 
-    ScriptAction = None
     controls = Controls()
     controls._logger = _logger
     controls._mock =  mock
 
-#controls.RigControl = RigController(mock)
-#    controls.TunerControl = TunerController(mock)
-#    controls.RotatorControl = RotatorController(mock)
-#    controls.ToneControl = ToneController(mock)
 
+    for actionEntry in actions :
+        ScriptAction = actionMap[actionEntry["action"]]
 
-    if action != None :
-        ScriptAction = actions[action]
-
-    if ScriptAction != None :
-        ScriptAction(controls, actionArgs, actionAutoStart)
+        if ScriptAction != None :
+            ScriptAction(controls, actionEntry["args"], actionAutoStart)
  
 if __name__ == "__main__":
     main(sys.argv)
