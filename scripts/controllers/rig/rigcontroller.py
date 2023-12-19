@@ -49,14 +49,6 @@ class RigController(BaseController) :
             ret = self._rpcProxy.rig.get_swrmeter()
         
         return ret
-        
-    def GetFrequency(self) :
-        if self._mock == True :
-            self._print("Mock self._rpcProxy.rig.get_vfo()")
-            ret = 14
-        else :
-            ret = self._rpcProxy.rig.get_vfo()
-        return ret
                 
     def TunePowerOn(self) :
         self._info("Tune Power On")
@@ -90,24 +82,28 @@ class RigController(BaseController) :
             self._rpcProxy.rig.set_ptt(0)
         return
 
-    def SetFrequencyMegahertz(self, frequencyMhz) :
-
-        freq = frequencyMhz * 1000000
-
+    def GetFrequency(self) :
         if self._mock == True :
-            self._print("Mock self._rpcProxy.rig.set_vfo()" + str(freq))
-            ret = 14
+            self._print("Mock self._rpcProxy.rig.get_vfo()")
+            ret = 14 * 1000000
         else :
-            ret = self._rpcProxy.rig.set_vfo(freq)
-        #return ret
-        return
-    
-    def GetFrequencyMegahertz(self) :
-        freq = self.GetFrequency()
-        ret = float(freq) / 1000000
-        
+            ret = self._rpcProxy.rig.get_vfo()
         return ret
+
+    def GetFrequencyMegahertz(self) :
+        return self.GetFrequency() / 1000000
+
+    def SetFrequencyMegahertz(self, frequency) :
+        self.SetFrequency(frequency * 1000000)
+        return
         
+    def SetFrequency(self, frequency) :
+        if self._mock == True :
+            self._print("Mock self._rpcProxy.rig.set_vfo()" + str(frequency))
+        else :
+            self._rpcProxy.rig.set_vfo(frequency)
+        return
+
     def GetFrequencyInMeters(self) :
         ret = 0
         

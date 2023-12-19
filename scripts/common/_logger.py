@@ -74,6 +74,7 @@ class Logger() :
 	def Important(self, message) :
 		self.Log(message, self.ImportantLevel)
 		return
+		
 	def Info(self, message) :
 		self.Log(message, self.InfoLevel)
 		return

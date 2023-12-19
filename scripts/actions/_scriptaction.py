@@ -74,24 +74,23 @@ class ScriptAction() :
         return
 
     def _verbose(self, message) :
-        self._print(message, 40)
+        self._logger().Verbose(message)
         return
 
     def _important(self, message) :
-        self._print(message, 1)
+        self._logger().Important(message)
         return
 
-
     def _info(self, message) :
-        self._print(message, 10)
+        self._logger().Info(message)
         return
 
     def _warn(self, message) :
-        self._print(message, 2)
+        self._logger().Warn(message)
         return
 
     def _error(self, message) :
-        self._print(message, 1)
+        self._logger().Error(message)
         return
 
     def _sleep(self, duration) :
@@ -101,7 +100,8 @@ class ScriptAction() :
         if duration >= 5 :
             loglevel = 10
 
-        self._print("Wait " + str(duration) + " seconds", loglevel)
+        self._logger().Log("Wait " + str(duration) + " seconds", loglevel)
+
         time.sleep(duration)
 
         return
