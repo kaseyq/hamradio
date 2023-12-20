@@ -179,13 +179,14 @@ class TuneAction(ScriptAction) :
             ret = self.StepTune(steps, bias)
             
             if ret != None :
-                if ret.SWR < self.MinFineTuneSWR :
+                if ret.SWR <= self.MinFineTuneSWR :
                     break
                 elif prev != None :
                     if prev.Step == ret.Step :
                         steps = min(steps + 1, self.MaxTuneSteps)
                     else:
-                        steps = max(steps - 1, 1)
+                        steps = 1
+                        #steps = max(steps - 1, 1)
                 else :
                     steps = max(steps - 1, 1)                
             else :
@@ -194,7 +195,7 @@ class TuneAction(ScriptAction) :
             steps = min(steps, self.MaxTuneSteps)
         
             if ret != None and prev != None :
-                    bias = ret.Step - prev.Step # to avoid checking the same steps
+                bias = ret.Step - prev.Step # to avoid checking the same steps
             else :
                 bias = 0
 

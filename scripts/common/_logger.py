@@ -24,17 +24,19 @@ class Logger() :
 	{ "level" : 99, "name": "Verbose", "abv": "VRB"}]
 
 	def __init__(self, Mock = False, logLevel = 40) :
+		self._mock = Mock
 		self._level = logLevel
 		return
 
 	def _logLevelAbbreviation(self, level) :
+		level = int(level)
 		ret = "log %s" %(str(level))
 
 		count = len(self.LogLevels)
 		index = count 
 		while index >= 0 :
 			index -= 1
-			if level <= self.LogLevels[index]["level"] :
+			if level <= int(self.LogLevels[index]["level"]):
 				ret = self.LogLevels[index]["abv"]
 			else :
 				break

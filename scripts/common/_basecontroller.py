@@ -14,20 +14,25 @@ class BaseController() :
     _configFile: object
     _mock: bool
     _busy: bool
-    _poolSize = int
+    _poolSize = 0
     _requestsPool: object
-    _c =  object
-    _logger = object
+    _c:  object
+    _logger: object
+    _controls: object
 
 
-    def __init__(self, mock = False, logger = None) :
-        self._logger = logger
+    def __init__(self, controls) :
+        self._controls = controls
+        self._logger = self._controls.Logger()
         self._busy = False
-        self._mock = mock
+        self._mock = self._controls.Mock()
         self._configFile = ConfigFile(self._configClass, self._configName)
-        self._requestsPool = Pool(self._poolSize)
+        
 
         self._initialize()
+
+        if self._poolSize > 0 :
+            self._requestsPool = Pool(self._poolSize)
 
         self._configFile.Write()
         self._info("Initialized")
