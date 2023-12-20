@@ -28,11 +28,10 @@ class BaseController() :
         self._mock = self._controls.Mock()
         self._configFile = ConfigFile(self._configClass, self._configName)
         
-
-        self._initialize()
-
         if self._poolSize > 0 :
             self._requestsPool = Pool(self._poolSize)
+
+        self._initialize()
 
         self._configFile.Write()
         self._info("Initialized")
